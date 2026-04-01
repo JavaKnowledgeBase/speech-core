@@ -176,6 +176,10 @@ class ChildAttemptRepository:
             id_field="attempt_id",
         )
 
+    def seed(self, items: list[ChildAttemptVectorRecord]) -> None:
+        for item in items:
+            self._memory[item.attempt_id] = item
+
     def upsert(self, item: ChildAttemptVectorRecord) -> None:
         self._memory[item.attempt_id] = item
         self._remote.upsert(item.model_dump(mode="json"))
@@ -202,6 +206,10 @@ class OutputFilterProfileRepository:
             id_field="profile_id",
         )
 
+    def seed(self, items: list[OutputFilterProfileRecord]) -> None:
+        for item in items:
+            self._memory[item.profile_id] = item
+
     def upsert(self, item: OutputFilterProfileRecord) -> None:
         self._memory[item.profile_id] = item
         self._remote.upsert(item.model_dump(mode="json"))
@@ -227,6 +235,10 @@ class EnvironmentStandardRepository:
             factory=lambda row: EnvironmentStandardProfileRecord.model_validate(row),
             id_field="environment_profile_id",
         )
+
+    def seed(self, items: list[EnvironmentStandardProfileRecord]) -> None:
+        for item in items:
+            self._memory[item.environment_profile_id] = item
 
     def upsert(self, item: EnvironmentStandardProfileRecord) -> None:
         self._memory[item.environment_profile_id] = item

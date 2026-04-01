@@ -13,6 +13,7 @@ from app.repositories import (
     TargetProfileRepository,
 )
 from app.vector_entities import (
+    ChildAttemptVectorRecord,
     EnvironmentStandardProfileRecord,
     OutputFilterProfileRecord,
     ReferenceVectorRecord,
@@ -150,6 +151,10 @@ class SeedData:
             )
         ]
 
+    @staticmethod
+    def child_attempts() -> list[ChildAttemptVectorRecord]:
+        return []
+
 
 profile_store = CommunicationProfileRepository()
 profile_store.seed(SeedData.communication_profiles())
@@ -161,11 +166,10 @@ reference_vector_repository = ReferenceVectorRepository()
 reference_vector_repository.seed(SeedData.reference_vectors())
 
 child_attempt_repository = ChildAttemptRepository()
+child_attempt_repository.seed(SeedData.child_attempts())
 
 output_filter_profile_repository = OutputFilterProfileRepository()
-for record in SeedData.output_filter_profiles():
-    output_filter_profile_repository.upsert(record)
+output_filter_profile_repository.seed(SeedData.output_filter_profiles())
 
 environment_standard_repository = EnvironmentStandardRepository()
-for record in SeedData.environment_profiles():
-    environment_standard_repository.upsert(record)
+environment_standard_repository.seed(SeedData.environment_profiles())

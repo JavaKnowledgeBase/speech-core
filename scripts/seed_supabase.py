@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from app.config import settings
 from app.data import (
+    SeedData,
     child_attempt_repository,
     environment_standard_repository,
     output_filter_profile_repository,
@@ -29,42 +30,42 @@ class SeedSummary:
 
 
 def _seed_profiles() -> SeedSummary:
-    items = profile_store.list_all()
+    items = SeedData.communication_profiles()
     for item in items:
         profile_store.upsert(item)
     return SeedSummary("communication_profiles", len(items))
 
 
 def _seed_targets(items: list[TargetProfileRecord] | None = None) -> SeedSummary:
-    records = items or target_profile_repository.list_all()
+    records = items or SeedData.target_profiles()
     for item in records:
         target_profile_repository.upsert(item)
     return SeedSummary("target_profiles", len(records))
 
 
 def _seed_reference_vectors(items: list[ReferenceVectorRecord] | None = None) -> SeedSummary:
-    records = items or reference_vector_repository.list_all()
+    records = items or SeedData.reference_vectors()
     for item in records:
         reference_vector_repository.upsert(item)
     return SeedSummary("reference_vectors", len(records))
 
 
 def _seed_output_filter_profiles() -> SeedSummary:
-    items = output_filter_profile_repository.list_all()
+    items = SeedData.output_filter_profiles()
     for item in items:
         output_filter_profile_repository.upsert(item)
     return SeedSummary("output_filter_profiles", len(items))
 
 
 def _seed_environment_profiles() -> SeedSummary:
-    items = environment_standard_repository.list_all()
+    items = SeedData.environment_profiles()
     for item in items:
         environment_standard_repository.upsert(item)
     return SeedSummary("environment_standard_profiles", len(items))
 
 
 def _seed_child_attempts() -> SeedSummary:
-    items = child_attempt_repository.list_all()
+    items = SeedData.child_attempts()
     for item in items:
         child_attempt_repository.upsert(item)
     return SeedSummary("child_attempt_vectors", len(items))
@@ -101,16 +102,16 @@ def main() -> int:
     parser.add_argument("--export-references-csv", type=Path, help="Optional CSV export path for the currently loaded reference vectors.")
     args = parser.parse_args()
 
-    target_items = load_target_profiles(args.targets_file) if args.targets_file else target_profile_repository.list_all()
-    reference_items = load_reference_vectors(args.references_file) if args.references_file else reference_vector_repository.list_all()
+    target_items = load_target_profiles(args.targets_file) if args.targets_file else SeedData.target_profiles()
+    reference_items = load_reference_vectors(args.references_file) if args.references_file else SeedData.reference_vectors()
 
     summaries = [
-        SeedSummary("communication_profiles", len(profile_store.list_all())),
+        SeedSummary("communication_profiles", len(SeedData.communication_profiles())),
         SeedSummary("target_profiles", len(target_items)),
         SeedSummary("reference_vectors", len(reference_items)),
-        SeedSummary("output_filter_profiles", len(output_filter_profile_repository.list_all())),
-        SeedSummary("environment_standard_profiles", len(environment_standard_repository.list_all())),
-        SeedSummary("child_attempt_vectors", len(child_attempt_repository.list_all())),
+        SeedSummary("output_filter_profiles", len(SeedData.output_filter_profiles())),
+        SeedSummary("environment_standard_profiles", len(SeedData.environment_profiles())),
+        SeedSummary("child_attempt_vectors", len(SeedData.child_attempts())),
     ]
 
     print("Seed plan:")
