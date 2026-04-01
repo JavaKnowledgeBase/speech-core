@@ -1,0 +1,14 @@
+fastapi==0.116.1
+uvicorn==0.35.0
+pydantic==2.11.7
+
+# Optional — required only when USE_LIVE_PROVIDER_CALLS=true
+openai>=1.0.0
+
+# Client adapter — required only if calling the service over HTTP from speech-intelligence
+httpx>=0.27.0
+
+# Development / testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+httpx>=0.27.0
