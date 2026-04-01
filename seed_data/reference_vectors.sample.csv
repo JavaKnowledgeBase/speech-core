@@ -1,0 +1,4 @@
+reference_id,target_id,modality,embedding,source_label,quality_score,age_band,notes
+ref-sample-a-audio-1,target-a,audio,"[0.71, 0.08, 0.24, 0.65, 0.02, 0.13, 0.55, 0.86]",clinic-batch-1,0.95,early-childhood,clear recording|quiet room
+ref-sample-a-lip-1,target-a,lip,"[0.68, 0.08, 0.26, 0.63, 0.02, 0.12, 0.56, 0.85]",clinic-batch-1,0.93,early-childhood,front camera|good lighting
+ref-sample-1-emotion-1,target-1,emotion,"[0.7, 0.09, 0.22, 0.66, 0.02, 0.14, 0.55, 0.88]",clinic-batch-1,0.91,early-childhood,low arousal|calm prompting

@@ -1,0 +1,162 @@
+[
+  {
+    "target_id": "target-a",
+    "target_type": "letter",
+    "display_text": "a",
+    "phoneme_group": "vowel",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-b",
+    "target_type": "letter",
+    "display_text": "b",
+    "phoneme_group": "bilabial",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-m",
+    "target_type": "letter",
+    "display_text": "m",
+    "phoneme_group": "bilabial",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-p",
+    "target_type": "letter",
+    "display_text": "p",
+    "phoneme_group": "bilabial",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-t",
+    "target_type": "letter",
+    "display_text": "t",
+    "phoneme_group": "alveolar",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-d",
+    "target_type": "letter",
+    "display_text": "d",
+    "phoneme_group": "alveolar",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-k",
+    "target_type": "letter",
+    "display_text": "k",
+    "phoneme_group": "velar",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-g",
+    "target_type": "letter",
+    "display_text": "g",
+    "phoneme_group": "velar",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-s",
+    "target_type": "letter",
+    "display_text": "s",
+    "phoneme_group": "fricative",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-n",
+    "target_type": "letter",
+    "display_text": "n",
+    "phoneme_group": "nasal",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-0",
+    "target_type": "number",
+    "display_text": "0",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-1",
+    "target_type": "number",
+    "display_text": "1",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-2",
+    "target_type": "number",
+    "display_text": "2",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-3",
+    "target_type": "number",
+    "display_text": "3",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-4",
+    "target_type": "number",
+    "display_text": "4",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-5",
+    "target_type": "number",
+    "display_text": "5",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-6",
+    "target_type": "number",
+    "display_text": "6",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-7",
+    "target_type": "number",
+    "display_text": "7",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-8",
+    "target_type": "number",
+    "display_text": "8",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  },
+  {
+    "target_id": "target-9",
+    "target_type": "number",
+    "display_text": "9",
+    "phoneme_group": "number",
+    "difficulty_level": 1,
+    "active": true
+  }
+]

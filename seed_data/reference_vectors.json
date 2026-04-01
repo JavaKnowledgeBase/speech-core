@@ -1,0 +1,1762 @@
+[
+  {
+    "reference_id": "ref-a-audio-1",
+    "target_id": "target-a",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.65,
+      0.02,
+      0.13,
+      0.55,
+      0.86
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target a"
+    ]
+  },
+  {
+    "reference_id": "ref-a-noise-1",
+    "target_id": "target-a",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.62,
+      0.04,
+      0.12,
+      0.55,
+      0.85
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target a"
+    ]
+  },
+  {
+    "reference_id": "ref-a-lip-1",
+    "target_id": "target-a",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.63,
+      0.02,
+      0.12,
+      0.56,
+      0.85
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target a"
+    ]
+  },
+  {
+    "reference_id": "ref-a-emotion-1",
+    "target_id": "target-a",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.66,
+      0.02,
+      0.14,
+      0.55,
+      0.88
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target a"
+    ]
+  },
+  {
+    "reference_id": "ref-b-audio-1",
+    "target_id": "target-b",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.61,
+      0.03,
+      0.17,
+      0.6,
+      0.81
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target b"
+    ]
+  },
+  {
+    "reference_id": "ref-b-noise-1",
+    "target_id": "target-b",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.58,
+      0.05,
+      0.16,
+      0.6,
+      0.8
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target b"
+    ]
+  },
+  {
+    "reference_id": "ref-b-lip-1",
+    "target_id": "target-b",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.59,
+      0.03,
+      0.16,
+      0.61,
+      0.8
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target b"
+    ]
+  },
+  {
+    "reference_id": "ref-b-emotion-1",
+    "target_id": "target-b",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.62,
+      0.03,
+      0.18,
+      0.6,
+      0.83
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target b"
+    ]
+  },
+  {
+    "reference_id": "ref-m-audio-1",
+    "target_id": "target-m",
+    "modality": "audio",
+    "embedding": [
+      0.62,
+      0.08,
+      0.24,
+      0.57,
+      0.01,
+      0.11,
+      0.65,
+      0.76
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target m"
+    ]
+  },
+  {
+    "reference_id": "ref-m-noise-1",
+    "target_id": "target-m",
+    "modality": "noise",
+    "embedding": [
+      0.58,
+      0.09,
+      0.23,
+      0.54,
+      0.03,
+      0.1,
+      0.65,
+      0.75
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target m"
+    ]
+  },
+  {
+    "reference_id": "ref-m-lip-1",
+    "target_id": "target-m",
+    "modality": "lip",
+    "embedding": [
+      0.59,
+      0.08,
+      0.26,
+      0.55,
+      0.01,
+      0.1,
+      0.66,
+      0.75
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target m"
+    ]
+  },
+  {
+    "reference_id": "ref-m-emotion-1",
+    "target_id": "target-m",
+    "modality": "emotion",
+    "embedding": [
+      0.61,
+      0.09,
+      0.22,
+      0.58,
+      0.01,
+      0.12,
+      0.65,
+      0.78
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target m"
+    ]
+  },
+  {
+    "reference_id": "ref-p-audio-1",
+    "target_id": "target-p",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.53,
+      0.02,
+      0.15,
+      0.7,
+      0.71
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target p"
+    ]
+  },
+  {
+    "reference_id": "ref-p-noise-1",
+    "target_id": "target-p",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.5,
+      0.04,
+      0.14,
+      0.7,
+      0.7
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target p"
+    ]
+  },
+  {
+    "reference_id": "ref-p-lip-1",
+    "target_id": "target-p",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.51,
+      0.02,
+      0.14,
+      0.71,
+      0.7
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target p"
+    ]
+  },
+  {
+    "reference_id": "ref-p-emotion-1",
+    "target_id": "target-p",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.54,
+      0.02,
+      0.16,
+      0.7,
+      0.73
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target p"
+    ]
+  },
+  {
+    "reference_id": "ref-t-audio-1",
+    "target_id": "target-t",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.49,
+      0.03,
+      0.09,
+      0.75,
+      0.66
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target t"
+    ]
+  },
+  {
+    "reference_id": "ref-t-noise-1",
+    "target_id": "target-t",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.46,
+      0.05,
+      0.08,
+      0.75,
+      0.65
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target t"
+    ]
+  },
+  {
+    "reference_id": "ref-t-lip-1",
+    "target_id": "target-t",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.47,
+      0.03,
+      0.08,
+      0.76,
+      0.65
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target t"
+    ]
+  },
+  {
+    "reference_id": "ref-t-emotion-1",
+    "target_id": "target-t",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.5,
+      0.03,
+      0.1,
+      0.75,
+      0.68
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target t"
+    ]
+  },
+  {
+    "reference_id": "ref-d-audio-1",
+    "target_id": "target-d",
+    "modality": "audio",
+    "embedding": [
+      0.62,
+      0.08,
+      0.24,
+      0.45,
+      0.01,
+      0.13,
+      0.5,
+      0.61
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target d"
+    ]
+  },
+  {
+    "reference_id": "ref-d-noise-1",
+    "target_id": "target-d",
+    "modality": "noise",
+    "embedding": [
+      0.58,
+      0.09,
+      0.23,
+      0.42,
+      0.03,
+      0.12,
+      0.5,
+      0.6
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target d"
+    ]
+  },
+  {
+    "reference_id": "ref-d-lip-1",
+    "target_id": "target-d",
+    "modality": "lip",
+    "embedding": [
+      0.59,
+      0.08,
+      0.26,
+      0.43,
+      0.01,
+      0.12,
+      0.51,
+      0.6
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target d"
+    ]
+  },
+  {
+    "reference_id": "ref-d-emotion-1",
+    "target_id": "target-d",
+    "modality": "emotion",
+    "embedding": [
+      0.61,
+      0.09,
+      0.22,
+      0.46,
+      0.01,
+      0.14,
+      0.5,
+      0.63
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target d"
+    ]
+  },
+  {
+    "reference_id": "ref-k-audio-1",
+    "target_id": "target-k",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.65,
+      0.02,
+      0.17,
+      0.55,
+      0.86
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target k"
+    ]
+  },
+  {
+    "reference_id": "ref-k-noise-1",
+    "target_id": "target-k",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.62,
+      0.04,
+      0.16,
+      0.55,
+      0.85
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target k"
+    ]
+  },
+  {
+    "reference_id": "ref-k-lip-1",
+    "target_id": "target-k",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.63,
+      0.02,
+      0.16,
+      0.56,
+      0.85
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target k"
+    ]
+  },
+  {
+    "reference_id": "ref-k-emotion-1",
+    "target_id": "target-k",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.66,
+      0.02,
+      0.18,
+      0.55,
+      0.88
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target k"
+    ]
+  },
+  {
+    "reference_id": "ref-g-audio-1",
+    "target_id": "target-g",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.61,
+      0.03,
+      0.11,
+      0.6,
+      0.81
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target g"
+    ]
+  },
+  {
+    "reference_id": "ref-g-noise-1",
+    "target_id": "target-g",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.58,
+      0.05,
+      0.1,
+      0.6,
+      0.8
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target g"
+    ]
+  },
+  {
+    "reference_id": "ref-g-lip-1",
+    "target_id": "target-g",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.59,
+      0.03,
+      0.1,
+      0.61,
+      0.8
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target g"
+    ]
+  },
+  {
+    "reference_id": "ref-g-emotion-1",
+    "target_id": "target-g",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.62,
+      0.03,
+      0.12,
+      0.6,
+      0.83
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target g"
+    ]
+  },
+  {
+    "reference_id": "ref-s-audio-1",
+    "target_id": "target-s",
+    "modality": "audio",
+    "embedding": [
+      0.62,
+      0.08,
+      0.24,
+      0.57,
+      0.01,
+      0.15,
+      0.65,
+      0.76
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target s"
+    ]
+  },
+  {
+    "reference_id": "ref-s-noise-1",
+    "target_id": "target-s",
+    "modality": "noise",
+    "embedding": [
+      0.58,
+      0.09,
+      0.23,
+      0.54,
+      0.03,
+      0.14,
+      0.65,
+      0.75
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target s"
+    ]
+  },
+  {
+    "reference_id": "ref-s-lip-1",
+    "target_id": "target-s",
+    "modality": "lip",
+    "embedding": [
+      0.59,
+      0.08,
+      0.26,
+      0.55,
+      0.01,
+      0.14,
+      0.66,
+      0.75
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target s"
+    ]
+  },
+  {
+    "reference_id": "ref-s-emotion-1",
+    "target_id": "target-s",
+    "modality": "emotion",
+    "embedding": [
+      0.61,
+      0.09,
+      0.22,
+      0.58,
+      0.01,
+      0.16,
+      0.65,
+      0.78
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target s"
+    ]
+  },
+  {
+    "reference_id": "ref-n-audio-1",
+    "target_id": "target-n",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.53,
+      0.02,
+      0.09,
+      0.7,
+      0.71
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target n"
+    ]
+  },
+  {
+    "reference_id": "ref-n-noise-1",
+    "target_id": "target-n",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.5,
+      0.04,
+      0.08,
+      0.7,
+      0.7
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target n"
+    ]
+  },
+  {
+    "reference_id": "ref-n-lip-1",
+    "target_id": "target-n",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.51,
+      0.02,
+      0.08,
+      0.71,
+      0.7
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target n"
+    ]
+  },
+  {
+    "reference_id": "ref-n-emotion-1",
+    "target_id": "target-n",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.54,
+      0.02,
+      0.1,
+      0.7,
+      0.73
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target n"
+    ]
+  },
+  {
+    "reference_id": "ref-0-audio-1",
+    "target_id": "target-0",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.49,
+      0.03,
+      0.13,
+      0.75,
+      0.66
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 0"
+    ]
+  },
+  {
+    "reference_id": "ref-0-noise-1",
+    "target_id": "target-0",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.46,
+      0.05,
+      0.12,
+      0.75,
+      0.65
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 0"
+    ]
+  },
+  {
+    "reference_id": "ref-0-lip-1",
+    "target_id": "target-0",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.47,
+      0.03,
+      0.12,
+      0.76,
+      0.65
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 0"
+    ]
+  },
+  {
+    "reference_id": "ref-0-emotion-1",
+    "target_id": "target-0",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.5,
+      0.03,
+      0.14,
+      0.75,
+      0.68
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 0"
+    ]
+  },
+  {
+    "reference_id": "ref-1-audio-1",
+    "target_id": "target-1",
+    "modality": "audio",
+    "embedding": [
+      0.62,
+      0.08,
+      0.24,
+      0.45,
+      0.01,
+      0.17,
+      0.5,
+      0.61
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 1"
+    ]
+  },
+  {
+    "reference_id": "ref-1-noise-1",
+    "target_id": "target-1",
+    "modality": "noise",
+    "embedding": [
+      0.58,
+      0.09,
+      0.23,
+      0.42,
+      0.03,
+      0.16,
+      0.5,
+      0.6
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 1"
+    ]
+  },
+  {
+    "reference_id": "ref-1-lip-1",
+    "target_id": "target-1",
+    "modality": "lip",
+    "embedding": [
+      0.59,
+      0.08,
+      0.26,
+      0.43,
+      0.01,
+      0.16,
+      0.51,
+      0.6
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 1"
+    ]
+  },
+  {
+    "reference_id": "ref-1-emotion-1",
+    "target_id": "target-1",
+    "modality": "emotion",
+    "embedding": [
+      0.61,
+      0.09,
+      0.22,
+      0.46,
+      0.01,
+      0.18,
+      0.5,
+      0.63
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 1"
+    ]
+  },
+  {
+    "reference_id": "ref-2-audio-1",
+    "target_id": "target-2",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.65,
+      0.02,
+      0.11,
+      0.55,
+      0.86
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 2"
+    ]
+  },
+  {
+    "reference_id": "ref-2-noise-1",
+    "target_id": "target-2",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.62,
+      0.04,
+      0.1,
+      0.55,
+      0.85
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 2"
+    ]
+  },
+  {
+    "reference_id": "ref-2-lip-1",
+    "target_id": "target-2",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.63,
+      0.02,
+      0.1,
+      0.56,
+      0.85
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 2"
+    ]
+  },
+  {
+    "reference_id": "ref-2-emotion-1",
+    "target_id": "target-2",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.66,
+      0.02,
+      0.12,
+      0.55,
+      0.88
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 2"
+    ]
+  },
+  {
+    "reference_id": "ref-3-audio-1",
+    "target_id": "target-3",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.61,
+      0.03,
+      0.15,
+      0.6,
+      0.81
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 3"
+    ]
+  },
+  {
+    "reference_id": "ref-3-noise-1",
+    "target_id": "target-3",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.58,
+      0.05,
+      0.14,
+      0.6,
+      0.8
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 3"
+    ]
+  },
+  {
+    "reference_id": "ref-3-lip-1",
+    "target_id": "target-3",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.59,
+      0.03,
+      0.14,
+      0.61,
+      0.8
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 3"
+    ]
+  },
+  {
+    "reference_id": "ref-3-emotion-1",
+    "target_id": "target-3",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.62,
+      0.03,
+      0.16,
+      0.6,
+      0.83
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 3"
+    ]
+  },
+  {
+    "reference_id": "ref-4-audio-1",
+    "target_id": "target-4",
+    "modality": "audio",
+    "embedding": [
+      0.62,
+      0.08,
+      0.24,
+      0.57,
+      0.01,
+      0.09,
+      0.65,
+      0.76
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 4"
+    ]
+  },
+  {
+    "reference_id": "ref-4-noise-1",
+    "target_id": "target-4",
+    "modality": "noise",
+    "embedding": [
+      0.58,
+      0.09,
+      0.23,
+      0.54,
+      0.03,
+      0.08,
+      0.65,
+      0.75
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 4"
+    ]
+  },
+  {
+    "reference_id": "ref-4-lip-1",
+    "target_id": "target-4",
+    "modality": "lip",
+    "embedding": [
+      0.59,
+      0.08,
+      0.26,
+      0.55,
+      0.01,
+      0.08,
+      0.66,
+      0.75
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 4"
+    ]
+  },
+  {
+    "reference_id": "ref-4-emotion-1",
+    "target_id": "target-4",
+    "modality": "emotion",
+    "embedding": [
+      0.61,
+      0.09,
+      0.22,
+      0.58,
+      0.01,
+      0.1,
+      0.65,
+      0.78
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 4"
+    ]
+  },
+  {
+    "reference_id": "ref-5-audio-1",
+    "target_id": "target-5",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.53,
+      0.02,
+      0.13,
+      0.7,
+      0.71
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 5"
+    ]
+  },
+  {
+    "reference_id": "ref-5-noise-1",
+    "target_id": "target-5",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.5,
+      0.04,
+      0.12,
+      0.7,
+      0.7
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 5"
+    ]
+  },
+  {
+    "reference_id": "ref-5-lip-1",
+    "target_id": "target-5",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.51,
+      0.02,
+      0.12,
+      0.71,
+      0.7
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 5"
+    ]
+  },
+  {
+    "reference_id": "ref-5-emotion-1",
+    "target_id": "target-5",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.54,
+      0.02,
+      0.14,
+      0.7,
+      0.73
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 5"
+    ]
+  },
+  {
+    "reference_id": "ref-6-audio-1",
+    "target_id": "target-6",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.49,
+      0.03,
+      0.17,
+      0.75,
+      0.66
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 6"
+    ]
+  },
+  {
+    "reference_id": "ref-6-noise-1",
+    "target_id": "target-6",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.46,
+      0.05,
+      0.16,
+      0.75,
+      0.65
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 6"
+    ]
+  },
+  {
+    "reference_id": "ref-6-lip-1",
+    "target_id": "target-6",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.47,
+      0.03,
+      0.16,
+      0.76,
+      0.65
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 6"
+    ]
+  },
+  {
+    "reference_id": "ref-6-emotion-1",
+    "target_id": "target-6",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.5,
+      0.03,
+      0.18,
+      0.75,
+      0.68
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 6"
+    ]
+  },
+  {
+    "reference_id": "ref-7-audio-1",
+    "target_id": "target-7",
+    "modality": "audio",
+    "embedding": [
+      0.62,
+      0.08,
+      0.24,
+      0.45,
+      0.01,
+      0.11,
+      0.5,
+      0.61
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 7"
+    ]
+  },
+  {
+    "reference_id": "ref-7-noise-1",
+    "target_id": "target-7",
+    "modality": "noise",
+    "embedding": [
+      0.58,
+      0.09,
+      0.23,
+      0.42,
+      0.03,
+      0.1,
+      0.5,
+      0.6
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 7"
+    ]
+  },
+  {
+    "reference_id": "ref-7-lip-1",
+    "target_id": "target-7",
+    "modality": "lip",
+    "embedding": [
+      0.59,
+      0.08,
+      0.26,
+      0.43,
+      0.01,
+      0.1,
+      0.51,
+      0.6
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 7"
+    ]
+  },
+  {
+    "reference_id": "ref-7-emotion-1",
+    "target_id": "target-7",
+    "modality": "emotion",
+    "embedding": [
+      0.61,
+      0.09,
+      0.22,
+      0.46,
+      0.01,
+      0.12,
+      0.5,
+      0.63
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 7"
+    ]
+  },
+  {
+    "reference_id": "ref-8-audio-1",
+    "target_id": "target-8",
+    "modality": "audio",
+    "embedding": [
+      0.71,
+      0.08,
+      0.24,
+      0.65,
+      0.02,
+      0.15,
+      0.55,
+      0.86
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 8"
+    ]
+  },
+  {
+    "reference_id": "ref-8-noise-1",
+    "target_id": "target-8",
+    "modality": "noise",
+    "embedding": [
+      0.67,
+      0.09,
+      0.23,
+      0.62,
+      0.04,
+      0.14,
+      0.55,
+      0.85
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.94,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 8"
+    ]
+  },
+  {
+    "reference_id": "ref-8-lip-1",
+    "target_id": "target-8",
+    "modality": "lip",
+    "embedding": [
+      0.68,
+      0.08,
+      0.26,
+      0.63,
+      0.02,
+      0.14,
+      0.56,
+      0.85
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 8"
+    ]
+  },
+  {
+    "reference_id": "ref-8-emotion-1",
+    "target_id": "target-8",
+    "modality": "emotion",
+    "embedding": [
+      0.7,
+      0.09,
+      0.22,
+      0.66,
+      0.02,
+      0.16,
+      0.55,
+      0.88
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.86,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 8"
+    ]
+  },
+  {
+    "reference_id": "ref-9-audio-1",
+    "target_id": "target-9",
+    "modality": "audio",
+    "embedding": [
+      0.8,
+      0.08,
+      0.24,
+      0.61,
+      0.03,
+      0.09,
+      0.6,
+      0.81
+    ],
+    "source_label": "seed-audio",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter audio reference",
+      "target 9"
+    ]
+  },
+  {
+    "reference_id": "ref-9-noise-1",
+    "target_id": "target-9",
+    "modality": "noise",
+    "embedding": [
+      0.76,
+      0.09,
+      0.23,
+      0.58,
+      0.05,
+      0.08,
+      0.6,
+      0.8
+    ],
+    "source_label": "seed-noise",
+    "quality_score": 0.82,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter noise reference",
+      "target 9"
+    ]
+  },
+  {
+    "reference_id": "ref-9-lip-1",
+    "target_id": "target-9",
+    "modality": "lip",
+    "embedding": [
+      0.77,
+      0.08,
+      0.26,
+      0.59,
+      0.03,
+      0.08,
+      0.61,
+      0.8
+    ],
+    "source_label": "seed-lip",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter lip reference",
+      "target 9"
+    ]
+  },
+  {
+    "reference_id": "ref-9-emotion-1",
+    "target_id": "target-9",
+    "modality": "emotion",
+    "embedding": [
+      0.79,
+      0.09,
+      0.22,
+      0.62,
+      0.03,
+      0.1,
+      0.6,
+      0.83
+    ],
+    "source_label": "seed-emotion",
+    "quality_score": 0.9,
+    "age_band": "early-childhood",
+    "notes": [
+      "starter emotion reference",
+      "target 9"
+    ]
+  }
+]

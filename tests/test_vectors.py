@@ -22,6 +22,16 @@ from app.vectors.tone_store import ToneProfileStore
 from app.vectors.matcher import best_match, match
 from app.models import FilterRequest, ChildState
 from app.pipeline import OutputFilterPipeline
+from app.data import (
+    SeedData,
+    child_attempt_repository,
+    environment_standard_repository,
+    output_filter_profile_repository,
+    reference_vector_repository,
+    target_profile_repository,
+)
+from app.vector_entities import ChildAttemptVectorRecord
+from app.vector_retrieval import blended_target_matches, ingest_attempt, modality_matches
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -515,3 +525,78 @@ class TestPipelineToneSuggestion:
         # The frustration filter should have cleaned this
         assert "failed" not in resp.filtered_text.lower()
         assert "try again" not in resp.filtered_text.lower()
+
+
+
+class TestReferenceVectorRetrieval:
+    def test_modality_match_returns_seed_reference(self):
+        attempt = ChildAttemptVectorRecord(
+            attempt_id="attempt-audio-1",
+            child_id="child-1",
+            target_id="target-a",
+            session_id="session-1",
+            audio_embedding=[0.71, 0.08, 0.24, 0.65, 0.02, 0.13, 0.55, 0.86],
+        )
+        results = modality_matches(attempt, "audio", k=1)
+        assert results
+        assert results[0].reference_id == "ref-a-audio-1"
+        assert results[0].target_id == "target-a"
+
+    def test_blended_match_includes_intended_target_in_top_results(self):
+        attempt = ChildAttemptVectorRecord(
+            attempt_id="attempt-blended-1",
+            child_id="child-1",
+            target_id="target-a",
+            session_id="session-1",
+            audio_embedding=[0.71, 0.08, 0.24, 0.65, 0.02, 0.13, 0.55, 0.86],
+            lip_embedding=[0.77, 0.08, 0.26, 0.59, 0.03, 0.16, 0.61, 0.8],
+        )
+        results = blended_target_matches(attempt, k=5)
+        assert results
+        target_ids = [item.target_id for item in results]
+        assert "target-a" in target_ids or "target-b" in target_ids
+
+    def test_ingest_attempt_persists_top_match(self):
+        attempt = ChildAttemptVectorRecord(
+            attempt_id="attempt-store-1",
+            child_id="child-1",
+            target_id="target-a",
+            session_id="session-2",
+            audio_embedding=[0.71, 0.08, 0.24, 0.65, 0.02, 0.13, 0.55, 0.86],
+        )
+        response = ingest_attempt(attempt, k=2)
+        stored = child_attempt_repository.get("attempt-store-1")
+        assert response.attempt.top_match_reference_id == "ref-a-audio-1"
+        assert stored is not None
+        assert stored.top_match_reference_id == "ref-a-audio-1"
+        assert stored.cosine_similarity is not None
+
+
+class TestSeededRepositories:
+    def test_target_seed_matches_first_month_plan(self):
+        targets = target_profile_repository.list_all()
+        assert len(targets) == 20
+
+    def test_reference_vector_seed_exists(self):
+        refs = reference_vector_repository.list_all()
+        assert len(refs) >= 80
+
+    def test_output_filter_profile_seed_exists(self):
+        profiles = output_filter_profile_repository.list_all()
+        assert profiles
+
+    def test_environment_standard_seed_exists(self):
+        env_profiles = environment_standard_repository.list_all()
+        assert env_profiles
+
+
+class TestFileBackedSeedData:
+    def test_file_backed_targets_load(self):
+        targets = SeedData.target_profiles()
+        assert len(targets) == 20
+        assert any(item.target_id == "target-a" for item in targets)
+
+    def test_file_backed_reference_vectors_load(self):
+        refs = SeedData.reference_vectors()
+        assert len(refs) >= 80
+        assert any(item.reference_id == "ref-a-audio-1" for item in refs)

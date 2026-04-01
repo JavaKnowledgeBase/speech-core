@@ -1,26 +1,37 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 from app.models import CommunicationProfile, OutputPolicy
+from app.repositories import (
+    ChildAttemptRepository,
+    CommunicationProfileRepository,
+    EnvironmentStandardRepository,
+    OutputFilterProfileRepository,
+    ReferenceVectorRepository,
+    TargetProfileRepository,
+)
+from app.vector_entities import (
+    EnvironmentStandardProfileRecord,
+    OutputFilterProfileRecord,
+    ReferenceVectorRecord,
+    TargetProfileRecord,
+)
+
+_SEED_DIR = Path(__file__).resolve().parent.parent / "seed_data"
 
 
-class ProfileStore:
-    """
-    In-memory profile store seeded with the same child and caregiver profiles
-    that are used in the speech-intelligence platform.
+def _load_json(name: str) -> list[dict]:
+    path = _SEED_DIR / name
+    with path.open("r", encoding="utf-8") as fh:
+        return json.load(fh)
 
-    In production, replace _load() with Supabase reads.
-    Profiles are keyed by profile_id.
-    """
 
-    def __init__(self) -> None:
-        self._profiles: dict[str, CommunicationProfile] = {}
-        self._load()
-
-    # ── Seed ──────────────────────────────────────────────────────────────────
-
-    def _load(self) -> None:
-        profiles: list[CommunicationProfile] = [
-            # ── Child profiles ────────────────────────────────────────────────
+class SeedData:
+    @staticmethod
+    def communication_profiles() -> list[CommunicationProfile]:
+        return [
             CommunicationProfile(
                 profile_id="comm-child-1",
                 audience="child",
@@ -59,7 +70,6 @@ class ProfileStore:
                     avoid_chatter=True,
                 ),
             ),
-            # ── Caregiver / parent profiles ───────────────────────────────────
             CommunicationProfile(
                 profile_id="comm-parent-1",
                 audience="parent",
@@ -99,35 +109,63 @@ class ProfileStore:
                 ),
             ),
         ]
-        for p in profiles:
-            self._profiles[p.profile_id] = p
 
-    # ── CRUD ──────────────────────────────────────────────────────────────────
+    @staticmethod
+    def target_profiles() -> list[TargetProfileRecord]:
+        return [TargetProfileRecord.model_validate(item) for item in _load_json("target_profiles.json")]
 
-    def get(self, profile_id: str) -> CommunicationProfile | None:
-        return self._profiles.get(profile_id)
+    @staticmethod
+    def reference_vectors() -> list[ReferenceVectorRecord]:
+        return [ReferenceVectorRecord.model_validate(item) for item in _load_json("reference_vectors.json")]
 
-    def get_by_owner(self, owner_id: str) -> CommunicationProfile | None:
-        for p in self._profiles.values():
-            if p.owner_id == owner_id:
-                return p
-        return None
+    @staticmethod
+    def output_filter_profiles() -> list[OutputFilterProfileRecord]:
+        return [
+            OutputFilterProfileRecord(
+                profile_id="ofp-child-1",
+                child_id="child-1",
+                caregiver_id="caregiver-1",
+                preferred_tone_embedding=[0.75, 0.10, 0.35, 0.70, 0.00, 0.15, 0.85, 0.90],
+                safe_expression_embedding=[0.80, 0.05, 0.20, 0.65, 0.00, 0.10, 0.90, 0.95],
+                best_reengagement_style=[0.65, 0.05, 0.15, 0.40, 0.00, 0.10, 1.00, 0.95],
+                parent_guidance_style=[0.78, 0.15, 0.35, 0.68, 0.00, 0.05, 0.65, 0.85],
+                overstimulation_flags=[],
+                verbosity_limit=72,
+                calming_style_vector=[0.75, 0.05, 0.20, 0.55, 0.00, 0.10, 0.85, 0.95],
+            )
+        ]
 
-    def upsert(self, profile: CommunicationProfile) -> None:
-        self._profiles[profile.profile_id] = profile
+    @staticmethod
+    def environment_profiles() -> list[EnvironmentStandardProfileRecord]:
+        return [
+            EnvironmentStandardProfileRecord(
+                environment_profile_id="env-child-1",
+                child_id="child-1",
+                baseline_room_embedding=[0.20, 0.18, 0.75, 0.12, 0.80, 0.35, 0.22, 0.10],
+                baseline_visual_clutter_score=0.2,
+                baseline_noise_score=0.15,
+                baseline_lighting_score=0.8,
+                baseline_distraction_notes=["screen off", "minimal bright toys"],
+                recommended_adjustments=["move bright toys out of view", "keep TV off during practice"],
+            )
+        ]
 
-    def delete(self, profile_id: str) -> bool:
-        if profile_id in self._profiles:
-            del self._profiles[profile_id]
-            return True
-        return False
 
-    def list_all(self) -> list[CommunicationProfile]:
-        return list(self._profiles.values())
+profile_store = CommunicationProfileRepository()
+profile_store.seed(SeedData.communication_profiles())
 
-    def list_by_audience(self, audience: str) -> list[CommunicationProfile]:
-        return [p for p in self._profiles.values() if p.audience == audience]
+target_profile_repository = TargetProfileRepository()
+target_profile_repository.seed(SeedData.target_profiles())
 
+reference_vector_repository = ReferenceVectorRepository()
+reference_vector_repository.seed(SeedData.reference_vectors())
 
-# Module-level singleton
-profile_store = ProfileStore()
+child_attempt_repository = ChildAttemptRepository()
+
+output_filter_profile_repository = OutputFilterProfileRepository()
+for record in SeedData.output_filter_profiles():
+    output_filter_profile_repository.upsert(record)
+
+environment_standard_repository = EnvironmentStandardRepository()
+for record in SeedData.environment_profiles():
+    environment_standard_repository.upsert(record)
