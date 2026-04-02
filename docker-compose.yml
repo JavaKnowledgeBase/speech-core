@@ -1,0 +1,27 @@
+services:
+  speech-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: speech-core:latest
+    ports:
+      - "18100:8000"
+    environment:
+      APP_ENV: production
+      SERVICE_API_KEY: ${SERVICE_API_KEY:?SERVICE_API_KEY is required}
+      REQUIRE_AUTH_IN_PRODUCTION: "true"
+      ALLOW_OPENAPI_IN_PRODUCTION: "false"
+      ENABLE_AUDIT_LOGGING: "true"
+      LOG_IDENTIFIER_SALT: ${LOG_IDENTIFIER_SALT:-speech-core}
+      USE_LIVE_PROVIDER_CALLS: ${USE_LIVE_PROVIDER_CALLS:-false}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      SUPABASE_URL: ${SUPABASE_URL:?SUPABASE_URL is required}
+      SUPABASE_KEY: ${SUPABASE_KEY:?SUPABASE_KEY is required}
+      SUPABASE_PROFILES_TABLE: ${SUPABASE_PROFILES_TABLE:-communication_profiles}
+      SUPABASE_TARGET_PROFILES_TABLE: ${SUPABASE_TARGET_PROFILES_TABLE:-target_profiles}
+      SUPABASE_REFERENCE_VECTORS_TABLE: ${SUPABASE_REFERENCE_VECTORS_TABLE:-reference_vectors}
+      SUPABASE_CHILD_ATTEMPTS_TABLE: ${SUPABASE_CHILD_ATTEMPTS_TABLE:-child_attempt_vectors}
+      SUPABASE_OUTPUT_FILTER_PROFILES_TABLE: ${SUPABASE_OUTPUT_FILTER_PROFILES_TABLE:-output_filter_profiles}
+      SUPABASE_ENVIRONMENT_PROFILES_TABLE: ${SUPABASE_ENVIRONMENT_PROFILES_TABLE:-environment_standard_profiles}
+    restart: unless-stopped
+

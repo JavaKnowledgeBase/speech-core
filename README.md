@@ -13,6 +13,7 @@ This repo now includes:
 - retrieval and attempt-ingestion flow for stored reference vectors
 - CSV and JSON import support for target profiles and reference vectors
 - production-safety controls for authenticated internal access, audit logging, and safer HTTP headers
+- Docker packaging for local and deployment-style runs
 
 ## Medical and privacy boundary
 
@@ -29,6 +30,8 @@ This codebase does not by itself make an organization HIPAA-, COPPA-, or FDA-com
 
 ## Key files
 
+- `Dockerfile`: production-oriented container image for the API
+- `docker-compose.yml`: local/deployment-style container run config
 - `sql/supabase_schema.sql`: first-pass Supabase + pgvector schema
 - `seed_data/target_profiles.json`: starter month-one targets
 - `seed_data/reference_vectors.json`: generated starter references for all 20 targets x 4 modalities
@@ -38,6 +41,38 @@ This codebase does not by itself make an organization HIPAA-, COPPA-, or FDA-com
 - `scripts/seed_supabase.py`: dry-run, import, export, and Supabase seed script
 - `app/observability.py`: structured audit logging with identifier hashing
 - `docs/medical-readiness.md`: deployment and standards-alignment checklist
+
+## Docker
+
+Build the image:
+
+```powershell
+docker build -t speech-core .
+```
+
+Run the container directly:
+
+```powershell
+docker run --rm -p 18100:8000 `
+  -e APP_ENV=production `
+  -e SERVICE_API_KEY=replace-me `
+  -e SUPABASE_URL=https://your-project.supabase.co `
+  -e SUPABASE_KEY=replace-me `
+  speech-core
+```
+
+Run with Compose:
+
+```powershell
+docker compose up --build
+```
+
+Important container notes:
+- Compose publishes the service on host port `18100` to avoid conflicts with apps already using `8000`, `8080`, `5173`, `5180`, `5432`, `6379`, `8765`, and `18080`
+- the container defaults to `APP_ENV=production`
+- non-health endpoints require `SERVICE_API_KEY` in production
+- `SUPABASE_URL` and `SUPABASE_KEY` are required for production startup
+- OpenAPI docs stay disabled in production unless `ALLOW_OPENAPI_IN_PRODUCTION=true`
 
 ## Reference vector CSV format
 
@@ -92,3 +127,4 @@ python scripts\seed_supabase.py
 ## Notes
 
 The current 80 reference vectors are scaffold/generated starter data meant to exercise the schema, retrieval flow, and import pipeline. They are not a substitute for clinically collected or production embedding data.
+
