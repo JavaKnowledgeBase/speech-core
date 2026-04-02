@@ -5,6 +5,7 @@ from typing import Generic, TypeVar
 
 from app.config import settings
 from app.models import CommunicationProfile
+from app.observability import audit_event
 from app.vector_entities import (
     ChildAttemptVectorRecord,
     EnvironmentStandardProfileRecord,
@@ -34,34 +35,79 @@ class SupabaseTableRepository(Generic[T]):
                 from supabase import create_client
             except ImportError:
                 return None
-            self._client = create_client(settings.supabase_url, settings.supabase_key)
+            try:
+                self._client = create_client(settings.supabase_url, settings.supabase_key)
+            except Exception as exc:  # noqa: BLE001
+                audit_event(
+                    "repository_remote_unavailable",
+                    table=self._table_name,
+                    operation="create_client",
+                    error_type=type(exc).__name__,
+                )
+                return None
         return self._client
 
     def upsert(self, payload: dict) -> None:
         client = self._get_client()
         if client is None:
             return
-        client.table(self._table_name).upsert(payload).execute()
+        try:
+            client.table(self._table_name).upsert(payload).execute()
+        except Exception as exc:  # noqa: BLE001
+            audit_event(
+                "repository_remote_failed",
+                table=self._table_name,
+                operation="upsert",
+                error_type=type(exc).__name__,
+            )
 
     def select_all(self) -> list[T]:
         client = self._get_client()
         if client is None:
             return []
-        rows = client.table(self._table_name).select("*").execute().data or []
+        try:
+            rows = client.table(self._table_name).select("*").execute().data or []
+        except Exception as exc:  # noqa: BLE001
+            audit_event(
+                "repository_remote_failed",
+                table=self._table_name,
+                operation="select_all",
+                error_type=type(exc).__name__,
+            )
+            return []
         return [self._factory(row) for row in rows]
 
     def select_one(self, field: str, value: str) -> T | None:
         client = self._get_client()
         if client is None:
             return None
-        rows = client.table(self._table_name).select("*").eq(field, value).limit(1).execute().data or []
+        try:
+            rows = client.table(self._table_name).select("*").eq(field, value).limit(1).execute().data or []
+        except Exception as exc:  # noqa: BLE001
+            audit_event(
+                "repository_remote_failed",
+                table=self._table_name,
+                operation="select_one",
+                field=field,
+                error_type=type(exc).__name__,
+            )
+            return None
         return self._factory(rows[0]) if rows else None
 
     def delete(self, value: str) -> bool:
         client = self._get_client()
         if client is None:
             return False
-        client.table(self._table_name).delete().eq(self._id_field, value).execute()
+        try:
+            client.table(self._table_name).delete().eq(self._id_field, value).execute()
+        except Exception as exc:  # noqa: BLE001
+            audit_event(
+                "repository_remote_failed",
+                table=self._table_name,
+                operation="delete",
+                error_type=type(exc).__name__,
+            )
+            return False
         return True
 
 

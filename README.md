@@ -12,6 +12,20 @@ This repo now includes:
 - starter target/reference seed data
 - retrieval and attempt-ingestion flow for stored reference vectors
 - CSV and JSON import support for target profiles and reference vectors
+- production-safety controls for authenticated internal access, audit logging, and safer HTTP headers
+
+## Medical and privacy boundary
+
+This service should be treated as clinical-support infrastructure for a child speech workflow, not as diagnostic or autonomous treatment software.
+
+Production expectations:
+- keep this service behind authenticated internal traffic
+- avoid logging raw child or caregiver text when audit logs are enabled
+- persist production data in Supabase or another approved store instead of memory fallback
+- obtain the required parental consent and privacy notices before collecting child data
+- review deployment with legal/compliance owners for HIPAA/COPPA scope and BAAs where applicable
+
+This codebase does not by itself make an organization HIPAA-, COPPA-, or FDA-compliant. It adds technical guardrails that support those programs.
 
 ## Key files
 
@@ -22,6 +36,8 @@ This repo now includes:
 - `seed_data/reference_vectors.sample.csv`: tiny hand-editable sample for real data contributors
 - `scripts/generate_reference_seed.py`: regenerates the scaffold reference dataset
 - `scripts/seed_supabase.py`: dry-run, import, export, and Supabase seed script
+- `app/observability.py`: structured audit logging with identifier hashing
+- `docs/medical-readiness.md`: deployment and standards-alignment checklist
 
 ## Reference vector CSV format
 

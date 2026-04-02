@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from fastapi import FastAPI, HTTPException
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI, HTTPException, Request, Response
 
 from app.config import settings
 from app.data import (
@@ -24,6 +26,7 @@ from app.models import (
     ProfileUpsertRequest,
     ProfileUpsertResponse,
 )
+from app.observability import anonymize_identifier, audit_event
 from app.policy_matrix import list_output_policies
 from app.providers import get_filter_provider
 from app.vector_entities import (
@@ -40,6 +43,12 @@ from app.vectors.models import PhraseContext, ToneOutcome
 from app.vectors.phrase_library import PHRASE_LIBRARY
 from app.vectors.tone_store import tone_store
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    validate_runtime_safety()
+    yield
+
+
 app = FastAPI(
     title="TalkBuddy Output Filter Service",
     description=(
@@ -49,10 +58,75 @@ app = FastAPI(
         "and frustration-aware filters in sequence. "
         "Set USE_LIVE_PROVIDER_CALLS=true and OPENAI_API_KEY to enable OpenAI refinement."
     ),
-    version="1.3.0",
+    version="1.4.0",
+    docs_url="/docs" if settings.openapi_enabled else None,
+    redoc_url="/redoc" if settings.openapi_enabled else None,
+    openapi_url="/openapi.json" if settings.openapi_enabled else None,
 )
 
 
+
+def validate_runtime_safety() -> None:
+    issues = settings.production_readiness_issues()
+    if issues:
+        raise RuntimeError("Unsafe production configuration: " + " ".join(issues))
+
+
+
+@app.middleware("http")
+async def apply_runtime_safety(request: Request, call_next):
+    auth_error = None
+    if settings.auth_required and request.url.path != "/health":
+        expected_key = settings.service_api_key
+        header_key = request.headers.get("x-service-api-key")
+        bearer_token = request.headers.get("authorization", "")
+        if bearer_token.lower().startswith("bearer "):
+            bearer_token = bearer_token.split(" ", 1)[1].strip()
+        else:
+            bearer_token = ""
+
+        if (not expected_key) or (header_key != expected_key and bearer_token != expected_key):
+            auth_error = Response(
+                content='{"detail":"Unauthorized"}',
+                media_type="application/json",
+                status_code=401,
+            )
+
+    if auth_error is not None:
+        response = auth_error
+        audit_event(
+            "request_rejected",
+            path=request.url.path,
+            method=request.method,
+            reason="unauthorized",
+        )
+    else:
+        response = await call_next(request)
+
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers.setdefault("X-Request-Id", anonymize_identifier(request.headers.get("x-request-id") or request.url.path) or "generated")
+    return response
+
+
+def _run_filter_request(endpoint_name: str, request: FilterRequest) -> FilterResponse:
+    resolved_request = _resolve_profile(request)
+    provider = get_filter_provider()
+    response = provider.run(resolved_request)
+    audit_event(
+        "filter_processed",
+        endpoint=endpoint_name,
+        provider=provider.name,
+        audience=response.audience,
+        context=resolved_request.context,
+        output_kind=response.output_kind,
+        architecture=response.architecture,
+        profile_resolved=resolved_request.profile is not None,
+        child_ref=anonymize_identifier(resolved_request.child_id),
+        owner_ref=anonymize_identifier(resolved_request.owner_id),
+    )
+    return response
 @app.get("/health", tags=["System"])
 def health() -> dict:
     return {
@@ -62,59 +136,61 @@ def health() -> dict:
         "live_providers": settings.use_live_provider_calls,
         "openai_configured": settings.configured(settings.openai_api_key),
         "supabase_enabled": settings.supabase_enabled,
+        "auth_required": settings.auth_required,
+        "openapi_enabled": settings.openapi_enabled,
     }
 
 
 @app.post("/filter", response_model=FilterResponse, tags=["Filter"])
 def filter_output(request: FilterRequest) -> FilterResponse:
-    request = _resolve_profile(request)
-    return get_filter_provider().run(request)
+    return _run_filter_request("filter", request)
 
 
 @app.post("/filter/preview", response_model=FilterPreviewResponse, tags=["Filter"])
 def filter_preview(request: FilterPreviewRequest) -> FilterPreviewResponse:
-    request = _resolve_profile(request)
-    return get_filter_provider().run(request)
+    return _run_filter_request("filter_preview", request)
 
 
 @app.post("/filter/batch", response_model=BatchFilterResponse, tags=["Filter"])
 def filter_batch(request: BatchFilterRequest) -> BatchFilterResponse:
-    provider = get_filter_provider()
-    results = [provider.run(_resolve_profile(item)) for item in request.items]
+    results = [_run_filter_request("filter_batch", item) for item in request.items]
     return BatchFilterResponse(results=results)
 
 
 @app.post("/filter/child", response_model=FilterResponse, tags=["Filter"])
 def filter_child(text: str, context: FilterContext = "general", owner_id: str | None = None) -> FilterResponse:
     profile = profile_store.get_by_owner(owner_id) if owner_id else None
-    return get_filter_provider().run(FilterRequest(audience="child", text=text, context=context, profile=profile))
+    return _run_filter_request("filter_child", FilterRequest(audience="child", text=text, context=context, profile=profile, owner_id=owner_id))
 
 
 @app.post("/filter/parent", response_model=FilterResponse, tags=["Filter"])
 def filter_parent(text: str, context: FilterContext = "guidance", owner_id: str | None = None) -> FilterResponse:
     profile = profile_store.get_by_owner(owner_id) if owner_id else None
-    return get_filter_provider().run(FilterRequest(audience="parent", text=text, context=context, profile=profile))
+    return _run_filter_request("filter_parent", FilterRequest(audience="parent", text=text, context=context, profile=profile, owner_id=owner_id))
 
 
 @app.post("/filter/caregiver-alert", response_model=FilterResponse, tags=["Filter"])
 def filter_caregiver_alert(text: str, owner_id: str | None = None) -> FilterResponse:
     profile = profile_store.get_by_owner(owner_id) if owner_id else None
-    return get_filter_provider().run(
-        FilterRequest(audience="parent", text=text, context="escalation", output_kind="caregiver_alert", profile=profile)
+    return _run_filter_request(
+        "filter_caregiver_alert",
+        FilterRequest(audience="parent", text=text, context="escalation", output_kind="caregiver_alert", profile=profile, owner_id=owner_id),
     )
 
 
 @app.post("/filter/environment-guidance", response_model=FilterResponse, tags=["Filter"])
 def filter_environment_guidance(text: str, owner_id: str | None = None) -> FilterResponse:
     profile = profile_store.get_by_owner(owner_id) if owner_id else None
-    return get_filter_provider().run(
+    return _run_filter_request(
+        "filter_environment_guidance",
         FilterRequest(
             audience="parent",
             text=text,
             context="guidance",
             output_kind="environment_adjustment_request",
             profile=profile,
-        )
+            owner_id=owner_id,
+        ),
     )
 
 
@@ -373,5 +449,13 @@ def retrieval_blended_match(
     min_similarity: float = 0.0,
 ) -> list[TargetBlendResult]:
     return blended_target_matches(attempt, k=k, min_similarity=min_similarity)
+
+
+
+
+
+
+
+
 
 
