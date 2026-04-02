@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -79,7 +79,7 @@ class ChildToneProfile(BaseModel):
 
     # Metadata
     total_sessions: int = 0
-    last_updated: datetime = Field(default_factory=datetime.utcnow)
+    last_updated: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     embedding_source: EmbeddingSource = "mock"
 
 
@@ -93,3 +93,4 @@ class ToneOutcome(BaseModel):
     context: PhraseContext
     success: bool           # did the child succeed on the next attempt?
     engagement_score: float = Field(ge=0.0, le=1.0)
+

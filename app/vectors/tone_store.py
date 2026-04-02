@@ -3,7 +3,7 @@ ToneProfileStore - per-child tone profile storage and update logic.
 """
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from app.data import output_filter_profile_repository
@@ -16,6 +16,10 @@ _DEFAULT_PREFERRED: list[float] = [0.75, 0.10, 0.35, 0.70, 0.00, 0.15, 0.85, 0.9
 _DEFAULT_SAFE:      list[float] = [0.80, 0.05, 0.20, 0.65, 0.00, 0.10, 0.90, 0.95]
 _DEFAULT_CALMING:   list[float] = [0.75, 0.05, 0.20, 0.55, 0.00, 0.10, 0.85, 0.95]
 _DEFAULT_REENGAG:   list[float] = [0.65, 0.05, 0.15, 0.40, 0.00, 0.10, 1.00, 0.95]
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
 
 
 class ToneProfileStore:
@@ -68,7 +72,7 @@ class ToneProfileStore:
                         profile.overstimulation_flags.append(tag)
 
         profile.total_sessions += 1
-        profile.last_updated = datetime.utcnow()
+        profile.last_updated = _utc_now()
 
         self.upsert(profile)
         return profile
@@ -108,7 +112,7 @@ class ToneProfileStore:
             unsuccessful_phrase_ids=[],
             overstimulation_flags=[],
             total_sessions=0,
-            last_updated=datetime.utcnow(),
+            last_updated=_utc_now(),
             embedding_source="mock",
         )
 
@@ -131,3 +135,4 @@ class ToneProfileStore:
 
 
 tone_store = ToneProfileStore()
+

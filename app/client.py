@@ -211,8 +211,10 @@ class FilterServiceClient:
             "text": kwargs["text"],
             "context": kwargs.get("context", "general"),
             "child_state": child_state,
+            "owner_id": kwargs.get("owner_id"),
         }
 
 
 # Module-level singleton — import and use directly
 filter_client = FilterServiceClient()
+

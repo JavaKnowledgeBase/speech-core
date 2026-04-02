@@ -112,6 +112,8 @@ class FilterRequest(BaseModel):
     environment: EnvironmentContext | None = None
     limits: FilterLimits | None = None
     profile: CommunicationProfile | None = None
+    profile_id: str | None = None
+    owner_id: str | None = None
     child_id: str | None = None
 
 
@@ -176,3 +178,4 @@ def infer_output_kind(
     if audience == "parent":
         return "parent_output"
     return "child_output"
+

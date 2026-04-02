@@ -6,6 +6,7 @@ from app.config import settings
 from app.data import (
     child_attempt_repository,
     environment_standard_repository,
+    output_filter_profile_repository,
     profile_store,
     reference_vector_repository,
     target_profile_repository,
@@ -318,7 +319,27 @@ def embed_phrase(text: str) -> dict:
 def _resolve_profile(request: FilterRequest) -> FilterRequest:
     if request.profile is not None:
         return request
-    return request
+
+    profile = None
+
+    if request.profile_id:
+        profile = profile_store.get(request.profile_id)
+        if profile is None:
+            raise HTTPException(status_code=404, detail=f"Profile '{request.profile_id}' not found.")
+    elif request.owner_id:
+        profile = profile_store.get_by_owner(request.owner_id)
+    elif request.child_id:
+        if request.audience == "child":
+            profile = profile_store.get_by_owner(request.child_id)
+        else:
+            filter_profile = output_filter_profile_repository.get_by_child(request.child_id)
+            if filter_profile and filter_profile.caregiver_id:
+                profile = profile_store.get_by_owner(filter_profile.caregiver_id)
+
+    if profile is None:
+        return request
+
+    return request.model_copy(update={"profile": profile})
 
 @app.post("/attempts/ingest", response_model=AttemptIngestResponse, tags=["Vector DB"])
 def ingest_child_attempt(request: AttemptIngestRequest) -> AttemptIngestResponse:
@@ -352,4 +373,5 @@ def retrieval_blended_match(
     min_similarity: float = 0.0,
 ) -> list[TargetBlendResult]:
     return blended_target_matches(attempt, k=k, min_similarity=min_similarity)
+
 

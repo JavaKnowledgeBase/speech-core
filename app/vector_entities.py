@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -17,7 +17,7 @@ class TargetProfileRecord(BaseModel):
     phoneme_group: str = ""
     difficulty_level: int = Field(default=1, ge=1, le=10)
     active: bool = True
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class ReferenceVectorRecord(BaseModel):
@@ -29,7 +29,7 @@ class ReferenceVectorRecord(BaseModel):
     quality_score: float = Field(default=0.0, ge=0.0, le=1.0)
     age_band: str = ""
     notes: list[str] = Field(default_factory=list)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class ChildAttemptVectorRecord(BaseModel):
@@ -44,7 +44,7 @@ class ChildAttemptVectorRecord(BaseModel):
     top_match_reference_id: str | None = None
     cosine_similarity: float | None = Field(default=None, ge=0.0, le=1.0)
     success_flag: bool | None = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class OutputFilterProfileRecord(BaseModel):
@@ -58,7 +58,7 @@ class OutputFilterProfileRecord(BaseModel):
     overstimulation_flags: list[str] = Field(default_factory=list)
     verbosity_limit: int = Field(default=100, ge=20, le=240)
     calming_style_vector: list[float] = Field(default_factory=list)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class EnvironmentStandardProfileRecord(BaseModel):
@@ -70,4 +70,5 @@ class EnvironmentStandardProfileRecord(BaseModel):
     baseline_lighting_score: float = Field(default=0.0, ge=0.0, le=1.0)
     baseline_distraction_notes: list[str] = Field(default_factory=list)
     recommended_adjustments: list[str] = Field(default_factory=list)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
