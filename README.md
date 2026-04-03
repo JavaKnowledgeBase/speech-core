@@ -41,13 +41,14 @@ This codebase does not by itself make an organization HIPAA-, COPPA-, or FDA-com
 - `scripts/seed_supabase.py`: dry-run, import, export, and Supabase seed script
 - `app/observability.py`: structured audit logging with identifier hashing
 - `docs/medical-readiness.md`: deployment and standards-alignment checklist
+- `docs/speech-filters-postman-collection.json`: Postman collection for local testing against port `18100`
 
 ## Docker
 
 Build the image:
 
 ```powershell
-docker build -t speech-core .
+docker build -t speech-filters-core .
 ```
 
 Run the container directly:
@@ -58,7 +59,7 @@ docker run --rm -p 18100:8000 `
   -e SERVICE_API_KEY=replace-me `
   -e SUPABASE_URL=https://your-project.supabase.co `
   -e SUPABASE_KEY=replace-me `
-  speech-core
+  speech-filters-core
 ```
 
 Run with Compose:
@@ -69,10 +70,10 @@ docker compose up --build
 
 Important container notes:
 - Compose publishes the service on host port `18100` to avoid conflicts with apps already using `8000`, `8080`, `5173`, `5180`, `5432`, `6379`, `8765`, and `18080`
+- this repo uses the unique image name `speech-filters-core:latest` to avoid collisions with other local `speech-core` images
 - the container defaults to `APP_ENV=production`
 - non-health endpoints require `SERVICE_API_KEY` in production
 - `SUPABASE_URL` and `SUPABASE_KEY` are required for production startup
-- OpenAPI docs stay disabled in production unless `ALLOW_OPENAPI_IN_PRODUCTION=true`
 
 ## Reference vector CSV format
 
@@ -127,4 +128,3 @@ python scripts\seed_supabase.py
 ## Notes
 
 The current 80 reference vectors are scaffold/generated starter data meant to exercise the schema, retrieval flow, and import pipeline. They are not a substitute for clinically collected or production embedding data.
-

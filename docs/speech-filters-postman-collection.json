@@ -1,0 +1,198 @@
+{
+  "info": {
+    "name": "Speech Filters Local",
+    "_postman_id": "9d2f7d25-3e24-4d42-a3fb-2e27c2f2f001",
+    "description": "Local Postman collection for the speech-filters service running on Docker host port 18100.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:18100"
+    },
+    {
+      "key": "service_api_key",
+      "value": "local-prod-key"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Filter Child Success",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-service-api-key",
+            "value": "{{service_api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"audience\": \"child\",\n  \"text\": \"Great job.\",\n  \"context\": \"success\",\n  \"owner_id\": \"child-1\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/filter",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "filter"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Filter Preview Parent Guidance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-service-api-key",
+            "value": "{{service_api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"audience\": \"parent\",\n  \"text\": \"Please help the child with one calm prompt.\",\n  \"context\": \"guidance\",\n  \"owner_id\": \"caregiver-1\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/filter/preview",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "filter",
+            "preview"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Filter Batch",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-service-api-key",
+            "value": "{{service_api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    {\n      \"audience\": \"child\",\n      \"text\": \"Great job.\",\n      \"context\": \"success\",\n      \"owner_id\": \"child-1\"\n    },\n    {\n      \"audience\": \"parent\",\n      \"text\": \"Please support the child calmly.\",\n      \"context\": \"guidance\",\n      \"owner_id\": \"caregiver-1\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/filter/batch",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "filter",
+            "batch"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Profiles List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-service-api-key",
+            "value": "{{service_api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/profiles",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "profiles"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Policy Catalogue",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-service-api-key",
+            "value": "{{service_api_key}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/filters/policies",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "filters",
+            "policies"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Blended Retrieval Match",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-service-api-key",
+            "value": "{{service_api_key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"attempt_id\": \"attempt-demo-1\",\n  \"child_id\": \"child-1\",\n  \"target_id\": \"target-a\",\n  \"session_id\": \"session-demo-1\",\n  \"audio_embedding\": [0.71, 0.08, 0.24, 0.65, 0.02, 0.13, 0.55, 0.86],\n  \"lip_embedding\": [0.77, 0.08, 0.26, 0.59, 0.03, 0.16, 0.61, 0.80],\n  \"emotion_embedding\": [],\n  \"noise_embedding\": []\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/retrieval/blended-match",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "retrieval",
+            "blended-match"
+          ]
+        }
+      }
+    }
+  ]
+}

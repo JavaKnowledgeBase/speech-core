@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: speech-core:latest
+    image: speech-filters-core:latest
     ports:
       - "18100:8000"
     environment:
@@ -24,4 +24,5 @@ services:
       SUPABASE_OUTPUT_FILTER_PROFILES_TABLE: ${SUPABASE_OUTPUT_FILTER_PROFILES_TABLE:-output_filter_profiles}
       SUPABASE_ENVIRONMENT_PROFILES_TABLE: ${SUPABASE_ENVIRONMENT_PROFILES_TABLE:-environment_standard_profiles}
     restart: unless-stopped
+
 
